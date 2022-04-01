@@ -1,0 +1,21 @@
+{
+  "name": "@wonder-partners/ar-button",
+  "version": "0.1.0",
+  "description": "A web component to easily display 3D models in native AR across browsers and mobile devices",
+  "main": "index.js",
+  "author": "Wonder Partners (https://wonder-partners.com)",
+  "license": "GPL-3.0",
+  "keywords": [
+    "ar",
+    "web-ar",
+    "augmented reality",
+    "quick look",
+    "scene viewer",
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//ar-button"
+  }
+}

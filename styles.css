@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap');
+
+ar-button {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.875em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 100px;
+}
+
+ar-button:before {
+  content: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_704_1749)'%3E%3Cpath d='M405.31 177.9C404.18 176.66 402.89 175.55 401.45 174.61L273.85 90.81C267.32 86.53 258.94 86.36 252.26 90.38L120.21 169.73C118.6 170.7 117.2 171.9 115.94 173.23C112 177.04 109.71 182.35 109.76 187.98L110.99 325.79C111.05 332.65 114.57 339.01 120.34 342.7L247.93 424.38C250.09 425.77 252.46 426.66 254.89 427.14C255.19 427.22 255.49 427.27 255.79 427.33C255.98 427.36 256.17 427.38 256.36 427.4C257.65 427.65 258.94 427.89 260.25 427.89C263.85 427.89 267.45 426.93 270.65 425.02L400.35 347.65C406.43 344.02 410.18 337.49 410.24 330.41L411.47 192.6C411.52 186.98 409.23 181.7 405.31 177.88V177.9ZM262.23 131.72L352.99 191.33L259.02 251.35L230.72 232.02L167.98 188.37L262.23 131.72V131.72ZM151.47 314.46L150.68 226.48L207.7 265.43L237.45 286.13L238.23 370L151.47 314.46V314.46ZM369.77 318.67L280 372.22L278.73 287.42L370.56 229.45L369.77 318.67Z' fill='%234285F4'/%3E%3Cpath d='M53.22 72.52C53.22 61.88 61.88 53.22 72.52 53.22H124.48V0H72.52C32.53 0 0 32.53 0 72.52V124.48H53.22V72.52V72.52Z' fill='%234285F4'/%3E%3Cpath d='M439.48 53.22C450.12 53.22 458.78 61.88 458.78 72.52V124.48H512V72.52C512 32.53 479.47 0 439.48 0H387.52V53.22H439.48Z' fill='%234285F4'/%3E%3Cpath d='M458.78 439.49C458.78 450.13 450.12 458.79 439.48 458.79H387.52V512.01H439.48C479.47 512.01 512 479.48 512 439.5V387.54H458.78V439.5V439.49Z' fill='%234285F4'/%3E%3Cpath d='M72.51 458.78C61.87 458.78 53.21 450.12 53.21 439.48V387.52H0V439.48C0 479.47 32.53 511.99 72.51 511.99H124.47V458.77H72.51V458.78Z' fill='%234285F4'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_704_1749'%3E%3Crect width='512' height='512' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 1rem;
+}
+
+ar-button:hover {
+  background-color: #f5f5f5;
+}
+
+ar-button:active {
+  background-color: #eeeeee;
+}
+
+ar-button>a,
+ar-button>a:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
