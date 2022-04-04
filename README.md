@@ -20,15 +20,38 @@ A web-component to display a 3D model in augmented reality using the native [Qui
 
 ## Attributes
 
-| Attribute name      | Platform  | Description                                                  |
-| ------------------- | --------- | ------------------------------------------------------------ |
-| `src`               | `android` | The URL to the 3D model for Android platform. Only glTF/GLB models are supported. |
-| `link`              | `android` | A URL for an external webpage. If present, a button will be surfaced in the UI that intents to this URL when clicked. |
-| `title`             | `android` | A name for the model. If present, it will be displayed in the UI. The name will be truncated with ellipses after 60 characters. |
-| `fallback-url`      | `android  | When the [Google app](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox) is not present on the device, this is the URL that the browser navigates to. |
-| `ios-src`           | `ios`     | The URL to the 3D model for iOS platform. Only USDZ models are supported. |
-| `checkout-title`    | `ios`     | A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. |
-| `checkout-subtitle` | `ios`     | If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. |
-| `price`             | `ios`     | If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. AR Quick Look displays the subtitle and price separated by a comma below the title. |
-| `call-to-action`    | `ios`     | If present, display this text as a button the quick look default UI. Only works when supplied alongside `checkout-title`, `checkout-subtitle` and `price`. |
+`src` → *uri* (Android)
 
+The URL to the 3D model for Android platform. Only glTF/GLB models are supported.
+
+`link` → *uri* (Android)
+
+A URL for an external webpage. If present, a button will be surfaced in the UI that intents to this URL when clicked.
+
+`title` → *string* (Android)
+
+A name for the model. If present, it will be displayed in the UI. The name will be truncated with ellipses after 60 characters.    
+
+`fallback-url` → *uri* (Android)
+
+When the [Google app](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox) is not present on the device, this is the URL that the browser navigates to.
+
+`ios-src` → *uri* (iOS)
+
+The URL to the 3D model for iOS platform. Only USDZ models are supported.
+
+`checkout-title` → *string* (iOS)
+
+A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. 
+
+`checkout-subtitle` → *string* (iOS)
+
+If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`.  
+
+`price ` → *string* (iOS)
+
+If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. AR Quick Look displays the subtitle and price separated by a comma below the title. Price should include the currency symbol.
+
+`call-to-action` → *uri* (iOS)
+
+If present, display this text as a button the quick look default UI. Only works when supplied alongside `checkout-title`, `checkout-subtitle` and `price`.
