@@ -7,18 +7,25 @@ const isMobile = {
   },
 };
 
-function activateAR(href) {
+function activateAR(href, link) {
   const anchor = document.createElement('a');
-  anchor.setAttribute('href', href);
 
   if (isMobile.iOS()) {
     if (anchor.relList.supports('ar')) {
       anchor.appendChild(document.createElement('img'));
       anchor.setAttribute('rel', 'ar');
+      anchor.addEventListener('message', (event) => {
+        if (event.data === '_apple_ar_quicklook_button_tapped') {
+          window.location.href = link;
+        }
+      }, false);
     } else {
       console.error('AR is not available.');
     }
   }
+
+  anchor.setAttribute('href', href);
+  document.body.appendChild(anchor);
   anchor.click();
 }
 
@@ -28,6 +35,7 @@ function initializeARButton(button) {
   }
 
   let href = '';
+  const link = button.getAttribute('link');
 
   if (isMobile.iOS()) {
     button.setAttribute('ar', 'quick-look');
@@ -55,14 +63,12 @@ function initializeARButton(button) {
     if (callToAction) {
       href += `&callToAction=${encodeURIComponent(callToAction)}`;
     }
-    console.log(href);
   } else if (isMobile.Android()) {
     button.setAttribute('ar', 'scene-viewer');
 
     const src = button.getAttribute('src');
     const fallbackURL = button.getAttribute('fallback-url') ?? 'https://developers.google.com/ar';
     const title = button.getAttribute('title');
-    const link = button.getAttribute('link');
 
     href = `intent://arvr.google.com/scene-viewer/1.0?file=${src}&mode=ar_only`;
 
@@ -71,19 +77,18 @@ function initializeARButton(button) {
     }
 
     if (link) {
-      href += `&link=${encodeURIComponent(link)}`;
+      href += `&link=${link}`;
     }
 
     href += '#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;';
     href += `S.browser_fallback_url=${encodeURIComponent(fallbackURL)};`;
     href += 'end;';
-    console.log(href);
   } else {
     console.warn('This platform does not support AR.');
     return;
   }
   button.addEventListener('click', () => {
-    activateAR(href);
+    activateAR(href, link);
   });
 }
 

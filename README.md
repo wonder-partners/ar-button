@@ -24,10 +24,6 @@ A web-component to display a 3D model in augmented reality using the native [Qui
 
 The URL to the 3D model for Android platform. Only glTF/GLB models are supported.
 
-`link` → *uri* (Android)
-
-A URL for an external webpage. If present, a button will be surfaced in the UI that intents to this URL when clicked.
-
 `title` → *string* (Android)
 
 A name for the model. If present, it will be displayed in the UI. The name will be truncated with ellipses after 60 characters.    
@@ -35,6 +31,10 @@ A name for the model. If present, it will be displayed in the UI. The name will 
 `fallback-url` → *uri* (Android)
 
 When the [Google app](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox) is not present on the device, this is the URL that the browser navigates to.
+
+`link` → *uri* (Android, iOS)
+
+A URL for an external webpage. If present, a button will be surfaced in the UI that intents to this URL when clicked.
 
 `ios-src` → *uri* (iOS)
 
@@ -52,6 +52,6 @@ If present, it will be displayed in the UI. Only works if supplied alongside `ch
 
 If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. AR Quick Look displays the subtitle and price separated by a comma below the title. Price should include the currency symbol.
 
-`call-to-action` → *uri* (iOS)
+`call-to-action` → *string* (iOS)
 
-If present, display this text as a button the quick look default UI. Only works when supplied alongside `checkout-title`, `checkout-subtitle` and `price`.
+If present, display this text as a button the quick look default UI. Only works when supplied alongside `checkout-title`, `checkout-subtitle` and `price`. You should also supply an url to `link` (see above).
