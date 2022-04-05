@@ -42,13 +42,13 @@ The URL to the 3D model for iOS platform. Only USDZ models are supported.
 
 `checkout-title` → *string* (iOS)
 
-A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. 
+A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`.
 
 `checkout-subtitle` → *string* (iOS)
 
 If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`.  
 
-`price ` → *string* (iOS)
+`price` → *string* (iOS)
 
 If present, it will be displayed in the UI. Only works if supplied alongside `checkout-subtitle`, `price`, and `call-to-action`. AR Quick Look displays the subtitle and price separated by a comma below the title. Price should include the currency symbol.
 
