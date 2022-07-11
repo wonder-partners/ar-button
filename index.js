@@ -9,6 +9,7 @@ const isMobile = {
 
 function activateAR(href, link) {
   const anchor = document.createElement('a');
+  anchor.setAttribute('id', 'ar-anchor');
 
   if (isMobile.iOS()) {
     if (anchor.relList.supports('ar')) {
@@ -45,6 +46,7 @@ function initializeARButton(button) {
     const checkoutSubtitle = button.getAttribute('checkout-subtitle');
     const price = button.getAttribute('price');
     const callToAction = button.getAttribute('call-to-action');
+    const canonicalWebPageUrl = button.getAttribute('canonical-web-page-url');
 
     href = `${src}#`;
 
@@ -62,6 +64,10 @@ function initializeARButton(button) {
 
     if (callToAction) {
       href += `&callToAction=${encodeURIComponent(callToAction)}`;
+    }
+
+    if (canonicalWebPageUrl) {
+      href += `&canonicalWebPageURL=${encodeURIComponent(canonicalWebPageURL)}`;
     }
   } else if (isMobile.Android()) {
     button.setAttribute('ar', 'scene-viewer');
