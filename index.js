@@ -1,3 +1,5 @@
+// @ts-check
+
 const isMobile = {
   Android() {
     return /android/i.test(navigator.userAgent);
@@ -16,6 +18,7 @@ function activateAR(href, link) {
       anchor.appendChild(document.createElement('img'));
       anchor.setAttribute('rel', 'ar');
       anchor.addEventListener('message', (event) => {
+        // @ts-ignore
         if (event.data === '_apple_ar_quicklook_button_tapped') {
           window.location.href = link;
         }
@@ -46,7 +49,7 @@ function initializeARButton(button) {
     const checkoutSubtitle = button.getAttribute('checkout-subtitle');
     const price = button.getAttribute('price');
     const callToAction = button.getAttribute('call-to-action');
-    const canonicalWebPageUrl = button.getAttribute('canonical-web-page-url');
+    const canonicalWebPageURL = button.getAttribute('canonical-web-page-url');
 
     href = `${src}#`;
 
@@ -66,7 +69,7 @@ function initializeARButton(button) {
       href += `&callToAction=${encodeURIComponent(callToAction)}`;
     }
 
-    if (canonicalWebPageUrl) {
+    if (canonicalWebPageURL) {
       href += `&canonicalWebPageURL=${encodeURIComponent(canonicalWebPageURL)}`;
     }
   } else if (isMobile.Android()) {
