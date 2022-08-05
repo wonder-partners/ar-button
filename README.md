@@ -32,6 +32,10 @@ A name for the model. If present, it will be displayed in the UI. The name will 
 
 When the [Google app](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox) is not present on the device, this is the URL that the browser navigates to.
 
+**`occlusion` → *boolean* (Android)**
+
+If present, turns on Object blending mode.
+
 **`link` → *uri* (Android, iOS)**
 
 A URL for an external webpage. If present, a button will be surfaced in the UI that intents to this URL when clicked.

@@ -78,8 +78,13 @@ function initializeARButton(button) {
     const src = button.getAttribute('src');
     const fallbackURL = button.getAttribute('fallback-url') ?? 'https://developers.google.com/ar';
     const title = button.getAttribute('title');
+    const occlusion = button.getAttribute('occlusion');
 
     href = `intent://arvr.google.com/scene-viewer/1.0?file=${src}&mode=ar_only`;
+
+    if (!occlusion) {
+      href += '&disable_occlusion=true';
+    }
 
     if (title) {
       href += `&title=${encodeURIComponent(title)}`;
