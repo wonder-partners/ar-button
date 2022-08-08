@@ -50,6 +50,7 @@ function initializeARButton(button) {
     const price = button.getAttribute('price');
     const callToAction = button.getAttribute('call-to-action');
     const canonicalWebPageURL = button.getAttribute('canonical-web-page-url');
+    const allowsContentScaling = button.getAttribute('allows-content-scaling');
 
     href = `${src}#`;
 
@@ -71,6 +72,10 @@ function initializeARButton(button) {
 
     if (canonicalWebPageURL) {
       href += `&canonicalWebPageURL=${encodeURIComponent(canonicalWebPageURL)}`;
+    }
+
+    if (allowsContentScaling === '0') {
+      href += '&allowsContentScaling=0';
     }
   } else if (isMobile.Android()) {
     button.setAttribute('ar', 'scene-viewer');
