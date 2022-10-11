@@ -1,6 +1,6 @@
 {
   "name": "@wonder-partners/ar-button",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "A web component to easily display 3D models in native AR across browsers and mobile devices",
   "main": "index.js",
   "author": "Wonder Partners (https://wonder-partners.com)",
