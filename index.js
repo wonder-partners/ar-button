@@ -5,7 +5,7 @@ const isMobile = {
     return /android/i.test(navigator.userAgent);
   },
   iOS() {
-    return /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+    return /iPad|iPhone|iPod/.test(navigator.userAgent);
   },
 };
 
