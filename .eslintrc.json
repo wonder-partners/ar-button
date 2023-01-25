@@ -10,8 +10,11 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "linebreak-style": "off",
         "no-undef": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off"
     },
     "plugins": [
         "eslint-plugin-html"

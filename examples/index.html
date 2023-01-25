@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Button Examples</title>
+
+    <script
+      data-consolejs-channel="c5a07390-ce1a-ec12-1a39-5cbe18e10f6e"
+      src="https://remotejs.com/agent/agent.js"
+    ></script>
+
+    <script type="module" src="../index.js"></script>
+    <script defer type="module" src="index.js"></script>
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <h3>Basic</h3>
+    <ar-button
+      src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
+      ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+    >
+      View in your space
+    </ar-button>
+
+    <h3>Full</h3>
+    <ar-button
+      id="my-ar-button"
+      src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
+      ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+      title="Ajouter au panier"
+      link="https://www.jardiland.com/jardiland_checkout/wonderpartner/?sku=2001242"
+      checkout-title="Œuf Poket"
+      checkout-subtitle="Naturel – H.197 cm"
+      price="334,95€"
+      ios-link="https://www.jardiland.com/jardiland_checkout/wonderpartner/?sku=2001242"
+      call-to-action="Ajouter au panier"
+      canonical-web-page-url="https://www.jardiland.com/fauteuil-oeuf-suspendu-pliant-poket-naturel-h-197-cm-2001242.html"
+      allows-content-scaling="0"
+      occlusion
+    >
+      View in your space
+    </ar-button>
+
+    <h3>Manual init</h3>
+    <ar-button id="deferred-initialization">View in you space</ar-button>
+  </body>
+</html>
