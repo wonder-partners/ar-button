@@ -1,4 +1,4 @@
-import { init } from '../main.js';
+import { init } from '../main.min.js';
 
 const arButton = document.getElementById('ar-button-3');
 
