@@ -34,6 +34,35 @@ const isMobile = {
 };
 
 /**
+ * @param {string} href
+ * @param {string} [link]
+ */
+function openARView(href, link = '') {
+  const anchor = document.createElement('a');
+  anchor.setAttribute('id', 'ar-anchor');
+
+  if (isMobile.iOS()) {
+    if (anchor.relList.supports('ar')) {
+      anchor.appendChild(document.createElement('img'));
+      anchor.setAttribute('rel', 'ar');
+      anchor.addEventListener('message', (event) => {
+        // @ts-ignore
+        if (event.data === '_apple_ar_quicklook_button_tapped') {
+          window.location.href = link;
+        }
+      }, false);
+    } else {
+      console.error('AR is not available.');
+      return;
+    }
+  }
+
+  anchor.setAttribute('href', href);
+  document.body.appendChild(anchor);
+  anchor.click();
+}
+
+/**
  * @param {Element} button
  */
 function initIOS(button) {
@@ -74,28 +103,7 @@ function initIOS(button) {
     href += '&allowsContentScaling=0';
   }
 
-  button.addEventListener('click', () => {
-    const anchor = document.createElement('a');
-    anchor.setAttribute('id', 'ar-anchor');
-
-    if (anchor.relList.supports('ar')) {
-      anchor.appendChild(document.createElement('img'));
-      anchor.setAttribute('rel', 'ar');
-      anchor.addEventListener('message', (event) => {
-        // @ts-ignore
-        if (event.data === '_apple_ar_quicklook_button_tapped') {
-          window.location.href = link;
-        }
-      }, false);
-    } else {
-      console.error('AR is not available.');
-      return;
-    }
-
-    anchor.setAttribute('href', href);
-    document.body.appendChild(anchor);
-    anchor.click();
-  });
+  button.addEventListener('click', () => openARView(href, link));
 }
 
 /**
@@ -129,13 +137,7 @@ function initAndroid(button) {
   href += `S.browser_fallback_url=${encodeURIComponent(fallbackURL)};`;
   href += 'end;';
 
-  button.addEventListener('click', () => {
-    const anchor = document.createElement('a');
-    anchor.setAttribute('id', 'ar-anchor');
-    anchor.setAttribute('href', href);
-    document.body.appendChild(anchor);
-    anchor.click();
-  });
+  button.addEventListener('click', () => openARView(href));
 }
 
 function autoInit() {

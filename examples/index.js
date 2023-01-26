@@ -6,7 +6,7 @@ init({
   element: arButton,
   iosConf: {
     src: 'https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz',
-    checkoutTitle: 'My Product',
+    checkoutTitle: 'My Cool Product',
     checkoutSubtitle: 'This is my cool product description',
     callToAction: 'Buy',
     canonicalWebPageURL: 'https://wonder-partners.com',
