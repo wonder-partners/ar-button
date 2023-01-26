@@ -162,17 +162,17 @@ function autoInit() {
  *
  * @param {object} [config.androidConf]
  * @param {string} config.androidConf.src
- * @param {string} config.androidConf.title
- * @param {string} config.androidConf.link
+ * @param {string} [config.androidConf.title]
+ * @param {string} [config.androidConf.link]
  * @param {string} [config.androidConf.fallbackURL]
  * @param {boolean} [config.androidConf.occlusion]
  *
  * @param {object} [config.iosConf]
  * @param {string} config.iosConf.src
- * @param {string} config.iosConf.checkoutTitle
+ * @param {string} [config.iosConf.checkoutTitle]
  * @param {string} [config.iosConf.checkoutSubtitle]
  * @param {string} [config.iosConf.link]
- * @param {string} config.iosConf.callToAction
+ * @param {string} [config.iosConf.callToAction]
  * @param {string} [config.iosConf.price]
  * @param {string} [config.iosConf.canonicalWebPageURL] By default, the link to the model itself.
  * @param {boolean} [config.iosConf.allowsContentScaling]
@@ -190,8 +190,9 @@ function init({ element, androidConf, iosConf }) {
     if (androidConf.title) element.setAttribute('title', androidConf.title);
     if (androidConf.link) element.setAttribute('link', androidConf.link);
     if (androidConf.fallbackURL) element.setAttribute('fallback-url', androidConf.fallbackURL);
-    if (androidConf.occlusion && androidConf.occlusion === true) element.setAttribute('occlusion', '');
-
+    if (androidConf.occlusion && androidConf.occlusion === true) {
+      element.setAttribute('occlusion', '');
+    }
     initAndroid(element);
   }
 
@@ -202,17 +203,18 @@ function init({ element, androidConf, iosConf }) {
     iosConf.price ??= '';
 
     element.setAttribute('ios-src', iosConf.src);
-    element.setAttribute('checkout-title', iosConf.checkoutTitle);
     element.setAttribute('checkout-subtitle', iosConf.checkoutSubtitle);
     element.setAttribute('price', iosConf.price);
 
+    if (iosConf.checkoutTitle) element.setAttribute('checkout-title', iosConf.checkoutTitle);
     if (iosConf.link) element.setAttribute('ios-link', iosConf.link);
     if (iosConf.callToAction) element.setAttribute('call-to-action', iosConf.callToAction);
-    if (iosConf.canonicalWebPageURL) element.setAttribute('canonical-web-page-url', iosConf.canonicalWebPageURL);
+    if (iosConf.canonicalWebPageURL) {
+      element.setAttribute('canonical-web-page-url', iosConf.canonicalWebPageURL);
+    }
     if (iosConf.allowsContentScaling) {
       element.setAttribute('allows-content-scaling', iosConf.allowsContentScaling ? '1' : '0');
     }
-
     initIOS(element);
   }
 }
