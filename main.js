@@ -82,7 +82,7 @@ function initIOS(button) {
   button.setAttribute('ar', 'quick-look');
 
   const src = button.getAttribute('ios-src');
-  const link = button.getAttribute('ios-link') ?? '';
+  const link = button.getAttribute('ios-link') ?? button.getAttribute('link') ?? '';
   const allowsContentScaling = button.getAttribute('allows-content-scaling');
 
   const checkoutTitle = getEncodedAttr(button, 'checkout-title');
