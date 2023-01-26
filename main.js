@@ -1,4 +1,5 @@
 // @ts-check
+const DEFERRED = 'deferred';
 
 class RequirementError extends Error {
   constructor(message) {
@@ -146,82 +147,74 @@ function autoInit() {
   const buttons = document.querySelectorAll('ar-button');
 
   buttons.forEach((b) => {
+    if (b.hasAttribute(DEFERRED)) return;
     if (isMobile.iOS()) initIOS(b);
     else initAndroid(b);
   });
 }
 
 /**
- * @param {Element} element
- * @param {string} src
- * @param {string} iosSrc
+ * @param {object} config
  *
- * @param {object} [androidConfig]
- * @param {string} androidConfig.title
- * @param {string} androidConfig.link
- * @param {string} [androidConfig.fallbackURL]
- * @param {boolean} [androidConfig.occlusion]
+ * @param {Element} config.element
  *
- * @param {object} [iOSConfig]
- * @param {string} iOSConfig.checkoutTitle
- * @param {string} iOSConfig.checkoutSubtitle
- * @param {string} iOSConfig.link
- * @param {string} iOSConfig.callToAction
- * @param {string} [iOSConfig.price]
- * @param {string} [iOSConfig.canonicalWebPageURL]
- * @param {boolean} [iOSConfig.allowsContentScaling]
+ * @param {object} [config.androidConf]
+ * @param {string} config.androidConf.src
+ * @param {string} config.androidConf.title
+ * @param {string} config.androidConf.link
+ * @param {string} [config.androidConf.fallbackURL]
+ * @param {boolean} [config.androidConf.occlusion]
+ *
+ * @param {object} [config.iosConf]
+ * @param {string} config.iosConf.src
+ * @param {string} config.iosConf.checkoutTitle
+ * @param {string} [config.iosConf.checkoutSubtitle]
+ * @param {string} [config.iosConf.link]
+ * @param {string} config.iosConf.callToAction
+ * @param {string} [config.iosConf.price]
+ * @param {string} [config.iosConf.canonicalWebPageURL] By default, the link to the model itself.
+ * @param {boolean} [config.iosConf.allowsContentScaling]
  */
-function init(element, src, iosSrc, androidConfig, iOSConfig) {
+function init({ element, androidConf, iosConf }) {
   ensure(element, 'element cannot be null');
-  ensure(src, 'src cannot be null, undefined or empty.');
-  ensure(iosSrc, 'iosSrc cannot be null, undefined or empty.');
 
-  element.setAttribute('src', src);
-  element.setAttribute('ios-src', iosSrc);
+  element.removeAttribute(DEFERRED);
 
-  if (androidConfig) {
-    const {
-      title, link, fallbackURL, occlusion,
-    } = androidConfig;
+  if (isMobile.Android() && androidConf) {
+    ensure(androidConf.src, 'src cannot be null, undefined or empty.');
 
-    element.setAttribute('title', title);
-    element.setAttribute('link', link);
-    element.setAttribute('fallbackURL', fallbackURL ?? 'https://developers.google.com/ar');
+    element.setAttribute('src', androidConf.src);
 
-    if (occlusion && occlusion === true) {
-      element.setAttribute('occlusion', '');
-    }
+    if (androidConf.title) element.setAttribute('title', androidConf.title);
+    if (androidConf.link) element.setAttribute('link', androidConf.link);
+    if (androidConf.fallbackURL) element.setAttribute('fallback-url', androidConf.fallbackURL);
+    if (androidConf.occlusion && androidConf.occlusion === true) element.setAttribute('occlusion', '');
+
+    initAndroid(element);
   }
 
-  if (iOSConfig) {
-    const {
-      checkoutTitle,
-      checkoutSubtitle,
-      callToAction,
-      price,
-      canonicalWebPageURL,
-      allowsContentScaling,
-    } = iOSConfig;
+  if (isMobile.iOS() && iosConf) {
+    ensure(iosConf.src, 'src cannot be null, undefined or empty.');
 
-    element.setAttribute('checkoutTitle', checkoutTitle);
-    element.setAttribute('checkoutSubtitle', checkoutSubtitle);
-    element.setAttribute('callToAction', callToAction);
-    element.setAttribute('price', price ?? '');
-    element.setAttribute('allows-content-scaling', (allowsContentScaling && allowsContentScaling === true) ? '1' : '0');
+    iosConf.checkoutSubtitle ??= 'ㅤ';
+    iosConf.price ??= '';
 
-    if (canonicalWebPageURL) {
-      element.setAttribute('canonicalWebPageUR', canonicalWebPageURL);
+    element.setAttribute('ios-src', iosConf.src);
+    element.setAttribute('checkout-title', iosConf.checkoutTitle);
+    element.setAttribute('checkout-subtitle', iosConf.checkoutSubtitle);
+    element.setAttribute('price', iosConf.price);
+
+    if (iosConf.link) element.setAttribute('ios-link', iosConf.link);
+    if (iosConf.callToAction) element.setAttribute('call-to-action', iosConf.callToAction);
+    if (iosConf.canonicalWebPageURL) element.setAttribute('canonical-web-page-url', iosConf.canonicalWebPageURL);
+    if (iosConf.allowsContentScaling) {
+      element.setAttribute('allows-content-scaling', iosConf.allowsContentScaling ? '1' : '0');
     }
+
+    initIOS(element);
   }
-
-  if (isMobile.iOS()) initIOS(element);
-  else initAndroid(element);
-
-  console.log('init', {
-    src, iosSrc, androidConfig, iOSConfig,
-  });
 }
 
-window.addEventListener('DOMContentLoaded', autoInit);
+autoInit();
 
 export { init };

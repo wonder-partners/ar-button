@@ -10,6 +10,8 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "no-param-reassign": "off",
+        "object-curly-newline": "off",
         "linebreak-style": "off",
         "no-undef": "off",
         "no-console": "off",
