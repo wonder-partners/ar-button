@@ -1,5 +1,4 @@
 // @ts-check
-const DEFERRED = 'deferred';
 
 class RequirementError extends Error {
   constructor(message) {
@@ -8,17 +7,7 @@ class RequirementError extends Error {
   }
 }
 
-/**
- * @param {*} condition The condition to check.
- * @param {string} message Custom error message.
- * @returns {boolean}
- */
-function ensure(condition, message = '') {
-  if (!condition) {
-    throw new RequirementError(message);
-  }
-  return true;
-}
+const DEFERRED = 'deferred';
 
 const isMobile = {
   Android: () => navigator.userAgent.match(/Android/i),
@@ -32,6 +21,30 @@ const isMobile = {
     || isMobile.Opera()
     || isMobile.Windows(),
 };
+
+/**
+ * @param {*} condition The condition to check.
+ * @param {string} message Custom error message.
+ * @returns {boolean}
+ */
+function ensure(condition, message = '') {
+  if (!condition) {
+    throw new RequirementError(message);
+  }
+  return true;
+}
+
+/**
+ * @param {Element} element
+ * @param {string} qualifiedName
+ * @returns {string | null} URI encoded attribute.
+ */
+function getEncodedAttr(element, qualifiedName) {
+  const attr = element.getAttribute(qualifiedName);
+  if (!attr) return null;
+  const encodedAttr = encodeURIComponent(attr);
+  return encodedAttr;
+}
 
 /**
  * @param {string} href
@@ -69,39 +82,23 @@ function initIOS(button) {
   button.setAttribute('ar', 'quick-look');
 
   const src = button.getAttribute('ios-src');
-  const checkoutTitle = button.getAttribute('checkout-title');
-  const checkoutSubtitle = button.getAttribute('checkout-subtitle');
-  const price = button.getAttribute('price');
   const link = button.getAttribute('ios-link') ?? '';
-  const callToAction = button.getAttribute('call-to-action');
-  const canonicalWebPageURL = button.getAttribute('canonical-web-page-url');
   const allowsContentScaling = button.getAttribute('allows-content-scaling');
+
+  const checkoutTitle = getEncodedAttr(button, 'checkout-title');
+  const checkoutSubtitle = getEncodedAttr(button, 'checkout-subtitle');
+  const price = getEncodedAttr(button, 'price');
+  const callToAction = getEncodedAttr(button, 'call-to-action');
+  const canonicalWebPageURL = getEncodedAttr(button, 'canonical-web-page-url');
 
   let href = `${src}#`;
 
-  if (checkoutTitle) {
-    href += `&checkoutTitle=${encodeURIComponent(checkoutTitle)}`;
-  }
-
-  if (checkoutSubtitle) {
-    href += `&checkoutSubtitle=${encodeURIComponent(checkoutSubtitle)}`;
-  }
-
-  if (price) {
-    href += `&price=${encodeURIComponent(price)}`;
-  }
-
-  if (callToAction) {
-    href += `&callToAction=${encodeURIComponent(callToAction)}`;
-  }
-
-  if (canonicalWebPageURL) {
-    href += `&canonicalWebPageURL=${encodeURIComponent(canonicalWebPageURL)}`;
-  }
-
-  if (allowsContentScaling === '0') {
-    href += '&allowsContentScaling=0';
-  }
+  if (checkoutTitle) href += `&checkoutTitle=${checkoutTitle}`;
+  if (checkoutSubtitle) href += `&checkoutSubtitle=${checkoutSubtitle}`;
+  if (price) href += `&price=${price}`;
+  if (callToAction) href += `&callToAction=${callToAction}`;
+  if (canonicalWebPageURL) href += `&canonicalWebPageURL=${canonicalWebPageURL}`;
+  if (allowsContentScaling === '0') href += '&allowsContentScaling=0';
 
   button.addEventListener('click', () => openARView(href, link));
 }
@@ -113,28 +110,21 @@ function initAndroid(button) {
   button.setAttribute('ar', 'scene-viewer');
 
   const src = button.getAttribute('src');
-  const fallbackURL = button.getAttribute('fallback-url') ?? 'https://developers.google.com/ar';
-  const title = button.getAttribute('title');
   const link = button.getAttribute('link');
+
+  const title = getEncodedAttr(button, 'title');
+  const fallbackURL = getEncodedAttr(button, 'fallback-url') ?? 'https://developers.google.com/ar';
+
   const occlusion = button.hasAttribute('occlusion');
 
   let href = `intent://arvr.google.com/scene-viewer/1.0?file=${src}&mode=ar_only`;
 
-  if (!occlusion) {
-    href += '&disable_occlusion=true';
-    console.log('occlusion is disabled');
-  }
-
-  if (title) {
-    href += `&title=${encodeURIComponent(title)}`;
-  }
-
-  if (link) {
-    href += `&link=${link}`;
-  }
+  if (title) href += `&title=${title}`;
+  if (link) href += `&link=${link}`;
+  if (!occlusion) href += '&disable_occlusion=true';
 
   href += '#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;';
-  href += `S.browser_fallback_url=${encodeURIComponent(fallbackURL)};`;
+  href += `S.browser_fallback_url=${fallbackURL};`;
   href += 'end;';
 
   button.addEventListener('click', () => openARView(href));
