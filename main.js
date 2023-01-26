@@ -151,20 +151,20 @@ function autoInit() {
  * @param {Element} config.element
  *
  * @param {object} [config.androidConf]
- * @param {string} config.androidConf.src
- * @param {string} [config.androidConf.title]
- * @param {string} [config.androidConf.link]
- * @param {string} [config.androidConf.fallbackURL]
- * @param {boolean} [config.androidConf.occlusion]
+ * @param {string} config.androidConf.src URL to the 3D model.
+ * @param {string} [config.androidConf.title] A name to be displayed in the UI.
+ * @param {string} [config.androidConf.link] A URL for an external webpage. Adds a button in the UI.
+ * @param {string} [config.androidConf.fallbackURL] URL to go to when the device is not supported.
+ * @param {boolean} [config.androidConf.occlusion] Toggles Object blending mode.
  *
  * @param {object} [config.iosConf]
- * @param {string} config.iosConf.src
- * @param {string} [config.iosConf.checkoutTitle]
- * @param {string} [config.iosConf.checkoutSubtitle]
- * @param {string} [config.iosConf.link]
- * @param {string} [config.iosConf.callToAction]
- * @param {string} [config.iosConf.price]
- * @param {string} [config.iosConf.canonicalWebPageURL] By default, the link to the model itself.
+ * @param {string} config.iosConf.src URL to the 3D model.
+ * @param {string} [config.iosConf.checkoutTitle] Name to display in the UI.
+ * @param {string} [config.iosConf.checkoutSubtitle] Description to display bellow the name.
+ * @param {string} [config.iosConf.link] URL for an external webpage. Adds a button in the UI.
+ * @param {string} [config.iosConf.callToAction] Text to display in the quick look button UI.
+ * @param {string} [config.iosConf.price] Price to display in the UI after the description.
+ * @param {string} [config.iosConf.canonicalWebPageURL] Link used in the native share feature.
  * @param {boolean} [config.iosConf.allowsContentScaling]
  */
 function init({ element, androidConf, iosConf }) {
