@@ -21,6 +21,7 @@
   "scripts": {
     "min": "terser main.js -o main.min.js -c --module -m",
     "dev": "five-server",
-    "publish": "npm run min && npm publish"
+    "publish": "npm run min && npm publish",
+    "pack": "npm run min && npm pack"
   }
 }
