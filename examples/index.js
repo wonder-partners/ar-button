@@ -1,4 +1,4 @@
-import { init } from '../main.js';
+import { init, isARQuickLookCompatible } from '../main.js';
 
 const arButton = document.getElementById('ar-button-3');
 
@@ -22,3 +22,6 @@ init({
     occlusion: false,
   },
 });
+
+const p = document.getElementById('quick-look-compatibility');
+p.innerText = `AR Quick Look compatibility: ${isARQuickLookCompatible()}`;

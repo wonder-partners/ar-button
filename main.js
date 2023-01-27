@@ -10,17 +10,36 @@ class RequirementError extends Error {
 const DEFERRED = 'deferred';
 
 const isMobile = {
-  Android: () => navigator.userAgent.match(/Android/i),
-  BlackBerry: () => navigator.userAgent.match(/BlackBerry/i),
-  iOS: () => navigator.userAgent.match(/iPhone|iPad|iPod/i),
-  Opera: () => navigator.userAgent.match(/Opera Mini/i),
-  Windows: () => navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i),
+  Android: () => navigator.userAgent.match(/Android/i) !== null,
+  BlackBerry: () => navigator.userAgent.match(/BlackBerry/i) !== null,
+  iOS: () => navigator.userAgent.match(/iPhone|iPad|iPod/i) !== null,
+  Opera: () => navigator.userAgent.match(/Opera Mini/i) !== null,
+  Windows: () => navigator.userAgent.match(/IEMobile/i) !== null
+    || navigator.userAgent.match(/WPDesktop/i) !== null,
+  iPadOS: () => (navigator.userAgent.includes('Mac') && 'ontouchend' in document),
   any: () => isMobile.Android()
-    || isMobile.BlackBerry()
     || isMobile.iOS()
+    || isMobile.iPadOS
     || isMobile.Opera()
+    || isMobile.BlackBerry()
     || isMobile.Windows(),
 };
+
+/**
+ * OS version number format for apple mobile devices: major_minor_patch.
+ * @returns {boolean}
+ */
+function isARQuickLookCompatible() {
+  const anchor = document.createElement('a');
+  const appleCheck = anchor.relList.supports('ar');
+
+  if (isMobile.iOS()) {
+    const match = navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/);
+    if (!match) return false;
+    return appleCheck && Number(match[0].split('_')[0]) > 12;
+  }
+  return appleCheck;
+}
 
 /**
  * @param {*} condition The condition to check.
@@ -54,8 +73,8 @@ function openARView(href, link = '') {
   const anchor = document.createElement('a');
   anchor.setAttribute('id', 'ar-anchor');
 
-  if (isMobile.iOS()) {
-    if (anchor.relList.supports('ar')) {
+  if (isMobile.iOS() || isMobile.iPadOS()) {
+    if (isARQuickLookCompatible()) {
       anchor.appendChild(document.createElement('img'));
       anchor.setAttribute('rel', 'ar');
       anchor.addEventListener('message', (event) => {
@@ -140,8 +159,8 @@ function autoInit() {
 
   buttons.forEach((b) => {
     if (b.hasAttribute(DEFERRED)) return;
-    if (isMobile.iOS()) initIOS(b);
-    else initAndroid(b);
+    if (isMobile.iOS() || isMobile.iPadOS()) initIOS(b);
+    else if (isMobile.Android()) initAndroid(b);
   });
 }
 
@@ -186,7 +205,7 @@ function init({ element, androidConf, iosConf }) {
     initAndroid(element);
   }
 
-  if (isMobile.iOS() && iosConf) {
+  if ((isMobile.iOS() || isMobile.iPadOS()) && iosConf) {
     ensure(iosConf.src, 'src cannot be null, undefined or empty.');
 
     iosConf.checkoutSubtitle ??= 'ㅤ';
@@ -211,4 +230,4 @@ function init({ element, androidConf, iosConf }) {
 
 autoInit();
 
-export { init };
+export { init, isARQuickLookCompatible };

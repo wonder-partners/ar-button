@@ -132,3 +132,4 @@ dist
 
 # User local config
 fiveserver.config.js
+*.min.js
