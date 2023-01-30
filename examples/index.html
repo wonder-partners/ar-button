@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Button Examples</title>
+
+    <script src="./index.js" type="module"></script>
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <h3>Basic</h3>
+    <ar-button
+      src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
+      ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+    >
+      View in your space
+    </ar-button>
+
+    <h3>Full</h3>
+    <ar-button
+      id="my-ar-button"
+      src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
+      ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+      title="Buy"
+      link="https://google.com"
+      ios-link="https://facebook.com"
+      checkout-title="Astronaut"
+      checkout-subtitle="Looks rad!"
+      price="$100"
+      call-to-action="Buy"
+      canonical-web-page-url="https://google.com"
+      allows-content-scaling="0"
+      occlusion
+    >
+      View in your space
+    </ar-button>
+
+    <h3>Manual init</h3>
+    <ar-button id="ar-button-3" deferred>View in you space</ar-button>
+
+    <p id="quick-look-compatibility"></p>
+  </body>
+</html>

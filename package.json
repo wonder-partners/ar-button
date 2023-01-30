@@ -1,8 +1,8 @@
 {
   "name": "@wonder-partners/ar-button",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "A web component to easily display 3D models in native AR across browsers and mobile devices",
-  "main": "index.js",
+  "main": "main.js",
   "author": "Wonder Partners (https://wonder-partners.com)",
   "license": "GPL-3.0",
   "keywords": [
@@ -17,5 +17,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Wonder-Partners/ar-button"
+  },
+  "scripts": {
+    "min": "terser main.js -o main.min.js -c --module -m",
+    "dev": "five-server",
+    "publish": "npm run min && npm publish",
+    "pack": "npm run min && npm pack"
   }
 }
