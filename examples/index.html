@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AR Button Examples</title>
 
-    <script src="./index.js" type="module"></script>
-
     <link rel="stylesheet" href="../styles.css" />
+
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const arButton = document.getElementById('emptyARButton');
+        arButton.setAttribute(
+          'src',
+          'https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb',
+        );
+        arButton.setAttribute(
+          'ios-src',
+          'https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz',
+        );
+        console.log('delayed init');
+      });
+    </script>
+
+    <script src="./index.js" type="module"></script>
   </head>
 
   <body>
@@ -16,6 +31,7 @@
     <ar-button
       src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
       ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+      allows-content-scaling="0"
     >
       View in your space
     </ar-button>
@@ -41,6 +57,9 @@
 
     <h3>Manual init</h3>
     <ar-button id="ar-button-3" deferred>View in you space</ar-button>
+
+    <h3>Empty sources</h3>
+    <ar-button id="emptyARButton" allows-content-scaling="0">View in your space</ar-button>
 
     <p id="quick-look-compatibility"></p>
   </body>

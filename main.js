@@ -218,16 +218,15 @@ function init({ element, androidConf, iosConf }) {
     if (iosConf.checkoutTitle) element.setAttribute('checkout-title', iosConf.checkoutTitle);
     if (iosConf.link) element.setAttribute('ios-link', iosConf.link);
     if (iosConf.callToAction) element.setAttribute('call-to-action', iosConf.callToAction);
-    if (iosConf.canonicalWebPageURL) {
+    if (iosConf.canonicalWebPageURL)
       element.setAttribute('canonical-web-page-url', iosConf.canonicalWebPageURL);
-    }
-    if (iosConf.allowsContentScaling) {
+    if (iosConf.allowsContentScaling)
       element.setAttribute('allows-content-scaling', iosConf.allowsContentScaling ? '1' : '0');
-    }
+
     initIOS(element);
   }
 }
 
-autoInit();
+window.addEventListener('DOMContentLoaded', autoInit);
 
 export { init, isARQuickLookCompatible };
