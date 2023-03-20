@@ -1,4 +1,4 @@
-import { init, isARQuickLookCompatible } from '../main.js';
+import { init, isARQuickLookCompatible, isChromeIOS } from '../main.js';
 
 const arButton = document.getElementById('ar-button-3');
 
@@ -25,3 +25,6 @@ init({
 
 const p = document.getElementById('quick-look-compatibility');
 p.innerText = `AR Quick Look compatibility: ${isARQuickLookCompatible()}`;
+
+const chromeBasedBrowser = document.getElementById('chrome-based-browser');
+chromeBasedBrowser.innerText = 'Is Chrome iOS: ' + isChromeIOS();

@@ -49,19 +49,19 @@ The URL to the 3D model for iOS platform. Only USDZ models are supported.
 
 #### `checkout-title`
 
-A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside *checkout-subtitle*, *price*, and *call-to-action* attributes.
+A name for the model. If present, it will be displayed in the UI. Only works if supplied alongside _checkout-subtitle_, _price_, and _call-to-action_ attributes.
 
 #### `checkout-subtitle`
 
-If present, it will be displayed in the UI. Only works if supplied alongside *checkout-subtitle*, *price*, and *call-to-action*.
+If present, it will be displayed in the UI. Only works if supplied alongside _checkout-subtitle_, _price_, and _call-to-action_.
 
 #### `price`
 
-If present, it will be displayed in the UI. Only works if supplied alongside *checkout-subtitle*, *price*, and *call-to-action*. AR Quick Look displays the subtitle and price separated by a comma below the title. Price should include the currency symbol.
+If present, it will be displayed in the UI. Only works if supplied alongside _checkout-subtitle_, _price_, and _call-to-action_. AR Quick Look displays the subtitle and price separated by a comma below the title. Price should include the currency symbol.
 
 #### `call-to-action`
 
-If present, display this text as a button the quick look default UI. Only works when supplied alongside *checkout-title*, *checkout-subtitle* and *price*. You should also supply an URL to *link* (see above).
+If present, display this text as a button the quick look default UI. Only works when supplied alongside _checkout-title_, _checkout-subtitle_ and _price_. You should also supply an URL to _link_ (see above).
 
 #### `ios-link`
 
@@ -112,7 +112,6 @@ init({
     occlusion: false,
   },
 });
-
 ```
 
 ### Configuration object
@@ -144,6 +143,10 @@ When initializing an `ar-button` programmatically, you need to pass a configurat
 
 ### FAQ
 
-**Q:** *Why can't I see my custom action in AR Quick Look?*
+**Q:** _Why can't I see my custom action in AR Quick Look?_
 
-**R:** Make sure that at least the `checkout-title`, `checkout-subtitle` and `call-to-action` (can be an non-breaking space) attributes are correctly filled.
+**R:** Make sure that at least the `checkout-title`, `checkout-subtitle` (can be an non-breaking space) and `call-to-action` attributes are correctly filled.
+
+**Q:** _Why can't I open AR on iOS within Chrome based browsers?_
+
+**R:** There is a false negative when checking AR Quicklook compatibility on chrome based browsers. For now, we just bypass the check entirely on those browsers to ensure compatibility. See the official bug report here: [https://bugs.webkit.org/show_bug.cgi?id=239135](https://bugs.webkit.org/show_bug.cgi?id=239135)

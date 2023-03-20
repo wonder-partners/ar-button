@@ -41,6 +41,10 @@ function isARQuickLookCompatible() {
   return appleCheck;
 }
 
+function isChromeIOS() {
+  return navigator.userAgent.match(/(crios)[/\s]([\d.]+)/ig) !== null;
+}
+
 /**
  * @param {*} condition The condition to check.
  * @param {string} message Custom error message.
@@ -74,7 +78,7 @@ function openARView(href, link = '') {
   anchor.setAttribute('id', 'ar-anchor');
 
   if (isMobile.iOS() || isMobile.iPadOS()) {
-    if (isARQuickLookCompatible()) {
+    if (isChromeIOS() || isARQuickLookCompatible()) {
       anchor.appendChild(document.createElement('img'));
       anchor.setAttribute('rel', 'ar');
       anchor.addEventListener('message', (event) => {
@@ -229,4 +233,4 @@ function init({ element, androidConf, iosConf }) {
 
 window.addEventListener('DOMContentLoaded', autoInit);
 
-export { init, isARQuickLookCompatible };
+export { init, isARQuickLookCompatible, isChromeIOS };
