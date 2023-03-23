@@ -10,7 +10,7 @@ init({
     checkoutSubtitle: 'This is my cool product description',
     callToAction: 'Buy',
     canonicalWebPageURL: 'https://wonder-partners.com',
-    allowsContentScaling: false,
+    allowsContentScaling: true,
     price: '$100',
     link: 'https://wonder-partners.com',
   },

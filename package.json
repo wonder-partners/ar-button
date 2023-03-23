@@ -1,6 +1,6 @@
 {
   "name": "@wonder-partners/ar-button",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A web component to easily display 3D models in native AR across browsers and mobile devices",
   "main": "main.js",
   "author": "Wonder Partners (https://wonder-partners.com)",
@@ -22,6 +22,6 @@
     "min": "terser main.js -o main.min.js -c --module -m",
     "dev": "five-server",
     "publish": "terser main.js -o main.min.js -c --module -m && npm publish",
-    "pack": "terser main.js -o main.min.js -c --module -m && npm pack"
+    "pack": "terser main.js -o main.min.js -c --module -m --timings && npm pack"
   }
 }
