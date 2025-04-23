@@ -76,6 +76,7 @@ function getEncodedAttr(element, qualifiedName) {
 function openARView(href, link = '') {
   const anchor = document.createElement('a');
   anchor.setAttribute('id', 'ar-anchor');
+  anchor.style.display = 'none';
 
   if (isMobile.iOS() || isMobile.iPadOS()) {
     if (isChromeIOS() || isARQuickLookCompatible()) {
